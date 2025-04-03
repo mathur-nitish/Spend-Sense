@@ -8,10 +8,9 @@ destination = ""
 import pandas as pd
 import joblib
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
-rf_model_path = os.path.join("model", "random_forest_model.pkl")
-rf_model_loaded = joblib.load(rf_model_path)
-ohe_path = os.path.join("model", "one_hot_encoder.pkl")
-ohe_loaded = joblib.load(ohe_path)
+
+rf_model_loaded = joblib.load(r"model\random_forest_model.pkl")
+ohe_loaded = joblib.load(r"model\one_hot_encoder.pkl")
 
 def predict_speed(data):
     
