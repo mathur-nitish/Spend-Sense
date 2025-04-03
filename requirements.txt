@@ -4,5 +4,4 @@ requests
 bs4
 joblib
 scikit-learn
-streamlit
 gunicorn
