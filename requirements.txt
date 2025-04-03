@@ -5,3 +5,5 @@ bs4
 joblib
 scikit-learn
 gunicorn
+numpy
+pandas
