@@ -27,7 +27,7 @@ def predict_speed(data):
 
 def analyze_payments(start_location, end_location):
     # Call the API to get nearby restaurants
-    url = "http://127.0.0.1:8070/nearby-restaurants"
+    url = "https://tempapi-a7a9f8f8dpbaf5gv.centralindia-01.azurewebsites.net/nearby-restaurants"
     params = {
         "start_location": start_location,
         "end_location": end_location,
