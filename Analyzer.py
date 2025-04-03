@@ -4,6 +4,7 @@ from collections import Counter
 
 starting = ""
 destination = ""
+import os
 
 import pandas as pd
 import joblib
