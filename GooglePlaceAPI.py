@@ -1,5 +1,7 @@
 # uvicorn GooglePlaceAPI:googlePlaceAPI
 
+# uvicorn GooglePlaceAPI:googlePlaceAPI --port 8070
+
 import fastapi
 import json
 import random

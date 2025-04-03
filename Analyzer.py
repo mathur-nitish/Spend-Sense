@@ -8,43 +8,33 @@ destination = ""
 import pandas as pd
 import joblib
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
-model = joblib.load('random_forest_model.pkl')
+rf_model_loaded = joblib.load(r"model\random_forest_model.pkl")
+ohe_loaded = joblib.load(r"model\one_hot_encoder.pkl")
 
 def predict_speed(data):
-    # Perform the same preprocessing as during training
-    # One-hot encoding
-    ohe = OneHotEncoder(sparse_output=False)
-    temp_encoder = ohe.fit_transform(data[['Service Provider']])
-    location_encoder = ohe.fit_transform(data[['LSA']])
-    tech_encoder = ohe.fit_transform(data[['Technology']])
-    test_type_encoder = ohe.fit_transform(data[['Test_type']])
+    
+    categorical_features = ['Service Provider', 'Technology', 'Test_type', 'LSA']
 
-    # Concatenate encoded data
-    encoded_df = pd.concat([
-        pd.DataFrame(temp_encoder, columns=ohe.get_feature_names_out(ohe.feature_names_in_)),
-        pd.DataFrame(location_encoder, columns=ohe.get_feature_names_out(ohe.feature_names_in_)),
-        pd.DataFrame(tech_encoder, columns=ohe.get_feature_names_out(ohe.feature_names_in_)),
-        pd.DataFrame(test_type_encoder, columns=ohe.get_feature_names_out(ohe.feature_names_in_))
-    ], axis=1)
+    encoded_new_data = ohe_loaded.transform(data[categorical_features])
+    X_new = pd.DataFrame(encoded_new_data, columns=ohe_loaded.get_feature_names_out())
 
-    data = pd.concat([data.drop(columns=['Service Provider', 'LSA', 'Technology', 'Test_type']), encoded_df], axis=1)
-    data.fillna(0, inplace=True)
-    scaler = StandardScaler()
-    data = scaler.fit_transform(data)
-    prediction = model.predict(data)
+    predicted_speed = rf_model_loaded.predict(X_new)
+    print("Predicted Data Speed (Mbps):", predicted_speed)
 
-    return prediction
+    return predicted_speed[0]
 
 
 
 def analyze_payments(start_location, end_location):
     # Call the API to get nearby restaurants
-    url = "http://127.0.0.1:8000/nearby-restaurants"
+    url = "http://127.0.0.1:8070/nearby-restaurants"
     params = {
         "start_location": start_location,
         "end_location": end_location,
         "num_restaurants": 15
     }
+
+    #GooglePlaceAPI.generate_nearby_restaurants(15,start_location,end_location)
 
     response = requests.get(url, params=params)
     
