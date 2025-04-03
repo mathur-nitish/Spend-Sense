@@ -43,8 +43,3 @@ def whatTocarry(input_data: SpeedPredictionInput):
              return {"response":"Digital Payments are accepted, but your mobile network network signals are poor!"}
     else:
          return {"response":"Use Cash!"}
-
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app,host="127.0.0.1",port=8002)
