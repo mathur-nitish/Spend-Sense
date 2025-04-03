@@ -2,6 +2,7 @@ import fastapi as FAST_API
 import Analyzer
 from pydantic import BaseModel
 import pandas as pd
+import uvicorn
 app = FAST_API.FastAPI()
 
 
