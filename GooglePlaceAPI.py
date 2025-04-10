@@ -30,7 +30,7 @@ def generate_nearby_restaurants(num_restaurants, start_location, end_location):
     
         deliveryOptions = random.choices(['Take-away', 'Dine-in', None], k=random.randint(1, 2))
         goodForChildren = random.choice([True, False, None])
-        paymentOptions = random.choices(['Digital-Payment', 'Cash', 'Card', None], k=random.randint(1, 2))
+        paymentOptions = random.choices(['Digital-Payment', 'Cash'], k=random.randint(1, 2))
         parkingAvailable = random.choice([True, False, None])
         
         # Randomly generate a location between start and end locations

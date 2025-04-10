@@ -7,7 +7,6 @@ destination = ""
 
 import pandas as pd
 import joblib
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
 rf_model_loaded = joblib.load(r"model\random_forest_model.pkl")
 ohe_loaded = joblib.load(r"model\one_hot_encoder.pkl")
 

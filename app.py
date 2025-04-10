@@ -1,7 +1,8 @@
 import fastapi as FAST_API
-import Analyzer
+from fastapi import Request
 from pydantic import BaseModel
 import pandas as pd
+import cache_optimizer as CacheOptimizer
 app = FAST_API.FastAPI()
 
 
@@ -12,12 +13,13 @@ class SpeedPredictionInput(BaseModel):
     end_loc: str
 
 
+
 @app.get("/")
 def basicGet():
     return {"message":"kaam krle poora"}
 
 @app.post("/predict")
-def whatTocarry(input_data: SpeedPredictionInput):
+def whatTocarry(request:Request, input_data: SpeedPredictionInput):
 
     start_location = input_data.start_loc
     end_location = input_data.end_loc
@@ -31,17 +33,11 @@ def whatTocarry(input_data: SpeedPredictionInput):
         "LSA": [end_location]
     })
 
-    op1Analysis = Analyzer.analyze_payments(start_location,end_location)
+    session_id = request.client.host
 
-    op2Analysis = Analyzer.predict_speed(data)
-    if(op1Analysis=="Digital Payments"):
-         op2Analysis = Analyzer.predict_speed(data)
-         if(op2Analysis>4):
-             return {"response":"Can rely on Digital Payments"}
-         else:
-             return {"response":"Digital Payments are accepted, but your mobile network network signals are poor!"}
-    else:
-         return {"response":"Use Cash!"}
+    response = CacheOptimizer.perform_calculation(session_id,data)
+
+    return {"response":response['result']} 
 
 
 if __name__ == "__main__":

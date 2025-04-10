@@ -10,6 +10,23 @@ POST http://127.0.0.1:8002/predict
 Content-Type: application/json
 
 {
+    "service_provider": "JIO",
+    "network_type": "4G",
+    "start_loc": "Andhra Pradesh",
+    "end_loc": "Delhi"
+}
+
+
+
+
+###
+GET https://tempapi-a7a9f8f8dpbaf5gv.centralindia-01.azurewebsites.net/nearby-restaurants?start_location=Delhi&end_location=Mumbai&num_restaurants=15
+
+###
+POST https://spendsensedev.azurewebsites.net/predict
+Content-Type: application/json
+
+{
     "service_provider": "AIRTEL",
     "network_type": "3G",
     "start_loc": "Delhi",
