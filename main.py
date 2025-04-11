@@ -5,6 +5,13 @@ import pandas as pd
 import uvicorn
 app = FAST_API.FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class SpeedPredictionInput(BaseModel):
     service_provider: str
