@@ -48,6 +48,6 @@ def whatTocarry(input_data: SpeedPredictionInput):
          if(op2Analysis>4):
              return {"response":"Can rely on Digital Payments"}
          else:
-             return {"response":"Digital Payments are accepted, but your mobile network network signals are poor!"}
+             return {"response":"Digital Payments are accepted, but your mobile network signals are poor!"}
     else:
          return {"response":"Use Cash!"}
